@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCamera : MonoBehaviour
 {
@@ -16,8 +17,9 @@ public class PlayerCamera : MonoBehaviour
 
     private void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * _sensX * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * _sensY * Time.deltaTime;
+        Vector2 mouseDelta = Mouse.current.delta.ReadValue(); // Had to change this line to use the new Input System
+        float mouseX = mouseDelta.x * _sensX * Time.deltaTime;
+        float mouseY = mouseDelta.y * _sensY * Time.deltaTime;
 
         _xRotation -= mouseY;
         _yRotation += mouseX;
